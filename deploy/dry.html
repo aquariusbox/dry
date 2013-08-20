@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dry</title>
+    <link rel="stylesheet" href="dry.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="custom_ui.css">
+    <!-- custom ui -->
+    <link rel="import" href="navbar.html">
+  </head>
+  <body>
+    <!-- Custom tag (navbar.dart) -->
+    <div class="container">
+      <x-navbar activeid="{{'t-dry'}}"></x-navbar>
+    </div>    
+    <!-- /container -->
+    <header>
+      <div id="map_canvas" class="background"></div>
+      <!--<div class="background"></div>-->
+      <div class="container">
+        <h1>Don't repeat yourself</h1>
+        <p>Assign task, workplan and knowledge in one place.</p>
+        <p>
+          <a class="btn btn-large btn-info" href="../../docs/#navbar">View
+            current tasks &raquo;</a>
+        </p>
+      </div>
+    </header>      
+    <!-- /container -->    
+    <!-- JQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js"></script>  
+    <!-- Google map -->  
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>    
+    <script type="application/dart" src="dry.dart"></script>
+    <script src="packages/browser/interop.js"></script>    
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

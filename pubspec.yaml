@@ -1,0 +1,7 @@
+name: dart_etude
+description: A sample WebUI application
+dependencies:
+  browser: any
+  google_maps: any
+  js: any
+  web_ui: any
