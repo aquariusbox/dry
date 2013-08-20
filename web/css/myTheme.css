@@ -95,6 +95,7 @@
 	/* text */
 	color: #262c31;
 	font-size: 12px;
+	white-space:nowrap;
 	}
 
 .fancyTable tbody tr.odd td {
@@ -144,6 +145,7 @@
 	font-size: 12px;
 	/*font-weight: bold;*/
 	/*text-shadow: 0 1px 1px #e8ebee;*/
+	
 	}
 	
 

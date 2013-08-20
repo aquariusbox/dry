@@ -1,4 +1,4 @@
-import "dart:async" as rB;import "dart:collection" as sB;import "dart:html" as l;import "dart:isolate" as sD;class dD{static const  eD="Chrome";final  QD;final  minimumVersion;const dD(this.QD,[this.minimumVersion]);}class fD{const fD();}class gD{final  name;const gD(this.name);}class hD{const hD();}class iD{const iD();}class jD extends AC with q{var wD;static final MC=new l.DocumentFragment.html('''
+import "dart:html" as l;import "dart:collection" as sB;import "dart:async" as rB;import "dart:isolate" as sD;class dD{static const  eD="Chrome";final  QD;final  minimumVersion;const dD(this.QD,[this.minimumVersion]);}class fD{const fD();}class gD{final  name;const gD(this.name);}class hD{const hD();}class iD{const iD();}class jD extends AC with q{var wD;static final MC=new l.DocumentFragment.html('''
   <div class="navbar navbar-white">
         <div class="container">
           <div class="navbar-header">

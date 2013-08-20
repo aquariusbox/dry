@@ -58,6 +58,7 @@
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(50%, rgba(255, 255, 255, 0.2)), color-stop(51%, rgba(255, 255, 255, 0.1)), color-stop(100%, rgba(255, 255, 255, 0.0)));
   color: #262c31;
   font-size: 12px;
+  white-space: nowrap;
 }
 .fancyTable tbody tr.odd td {
   background-color: #d6e0ef;

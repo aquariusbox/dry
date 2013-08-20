@@ -29,9 +29,12 @@
         <div class="col-md-2">
           Scrope
         </div>         
-        <div class="col-md-2">
+        <div class="col-md-3">
           Segment
-        </div>               
+        </div> 
+        <div class="col-md-2">
+          Field Number
+        </div>                         
       </div>      
       <div class="row">
         <div class="col-md-2">
@@ -50,13 +53,20 @@
           </select>
         </div>         
         <div class="col-md-3">
-          <select id="ip-segments" class="form-control" name="segment" template iterate="segment in segments" bind-value="selectedSegment" on-change="fetchMatrix()">
+          <select id="ip-segments" class="form-control" name="segment" template iterate="segment in segments" bind-value="selectedSegment" on-change="fetchFields()">
             <option selected="{{selectedSegment == segment}}">{{segment}}</option>
           </select>
-        </div>               
+        </div>    
+        <div class="col-md-2">
+          <select id="ip-fields" class="form-control" name="field" template iterate="field in fields" bind-value="selectedField" on-change="fetchMatrix()">
+            <option selected="{{selectedField == field}}">{{field}}</option>
+          </select>
+        </div>                       
       </div>      
     </div> <!-- end container-->
-    <div class="container"><h4>Rules and TP</h4></div>
+    <div class="container">
+        <h4>Rules and TP </h4><span class="label label-info">N</span> N means the execution sequence (start from 1 to X).
+    </div>
     <div id="div-matrix" class="container">
       <!-- <div id="div-matrix"></div>-->
     <div>
