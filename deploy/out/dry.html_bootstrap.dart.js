@@ -6374,7 +6374,7 @@ z=$.bD($.P5.I9([])).gMh()
 y=new $.n6($.Lm(z,[]))
 z=y.uG
 x=$.w1(z)
-x.u(z,"zoom",this.a.j1(10)+5)
+x.u(z,"zoom",this.a.j1(9)+5)
 x.u(z,"disableDoubleClickZoom",!0)
 w=$.MD(-85,85,3)
 v=$.MD(-180,180,3)
@@ -7886,16 +7886,16 @@ $.O.$isa=true
 $.O.$isString=true
 $.O.$isfR=true
 $.O.$asfR=[$.O]
-$.TJ.$isa=true
+$.rE.$isrE=true
+$.rE.$isa=true
 $.aX.$isa=true
 $.MO.$isMO=true
 $.MO.$isa=true
-$.rE.$isrE=true
-$.rE.$isa=true
 $.IY.$isa=true
 $.HV.$isa=true
 $.EH.$isEH=true
 $.EH.$isa=true
+$.TJ.$isa=true
 $.xY.$isrE=true
 $.xY.$isa=true
 $.Qc=function(a){if(typeof a=="number")return $.P.prototype

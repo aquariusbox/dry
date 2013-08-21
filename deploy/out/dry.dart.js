@@ -4030,7 +4030,7 @@ z=$.bD($.P5.I9([])).gMh()
 y=new $.n6($.Lm(z,[]))
 z=y.LO
 x=$.w1(z)
-x.u(z,"zoom",this.a.j1(10)+5)
+x.u(z,"zoom",this.a.j1(9)+5)
 x.u(z,"disableDoubleClickZoom",!0)
 w=$.MD(-85,85,3)
 v=$.MD(-180,180,3)

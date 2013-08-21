@@ -29,12 +29,15 @@
         <div class="col-md-2">
           Scrope
         </div>         
-        <div class="col-md-3">
+        <div class="col-md-2">
           Segment
         </div> 
         <div class="col-md-2">
           Field Number
-        </div>                         
+        </div>  
+        <div class="col-md-2">
+          Case
+        </div>                               
       </div>      
       <div class="row">
         <div class="col-md-2">
@@ -52,14 +55,19 @@
             <option selected="{{selectedConvType == convType}}">{{convType}}</option>
           </select>
         </div>         
-        <div class="col-md-3">
+        <div class="col-md-2">
           <select id="ip-segments" class="form-control" name="segment" template iterate="segment in segments" bind-value="selectedSegment" on-change="fetchFields()">
             <option selected="{{selectedSegment == segment}}">{{segment}}</option>
           </select>
         </div>    
         <div class="col-md-2">
-          <select id="ip-fields" class="form-control" name="field" template iterate="field in fields" bind-value="selectedField" on-change="fetchMatrix()">
+          <select id="ip-fields" class="form-control" name="field" template iterate="field in fields" bind-value="selectedField" on-change="fetchCases()">
             <option selected="{{selectedField == field}}">{{field}}</option>
+          </select>
+        </div>          
+        <div class="col-md-2">
+          <select id="ip-rulecases" class="form-control" name="rulecase" template iterate="rulecase in rulecases" bind-value="selectedRulecase" on-change="fetchMatrix()">
+            <option selected="{{selectedRulecase == rulecase}}">{{rulecase}}</option>
           </select>
         </div>                       
       </div>      

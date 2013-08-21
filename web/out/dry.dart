@@ -27,7 +27,7 @@ void embedGoogleMap(){
   var rng = new math.Random();
   js.scoped((){
     final mapOptions = new MapOptions()
-      ..zoom = (rng.nextInt(10) + 5)
+      ..zoom = (rng.nextInt(9) + 5)
       ..disableDoubleClickZoom = true
       ..center = new LatLng(randomInRange(-85,85,3), randomInRange(-180,180,3))
       ..mapTypeId = MapTypeId.TERRAIN

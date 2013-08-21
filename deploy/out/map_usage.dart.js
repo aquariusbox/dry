@@ -1950,11 +1950,11 @@ return!1},
 "+moveNext:0:0":0,
 gl:function(){return this.Ao.gl()},
 "+current":0,
-$asAn:null},"+WhereIterator": [],ao:{"":"mW;z6,nr",
+$asAn:null},"+WhereIterator": [],Sk:{"":"mW;z6,nr",
 gA:function(a){var z,y,x
 z=this.z6
 z=z.gA(z)
-y=$.Y9(this.$asao,$.oX(this))
+y=$.Y9(this.$asSk,$.oX(this))
 x=y==null?null:y[0]
 z=new $.y9(z,this.nr)
 z.$builtinTypeInfo=[x]
@@ -6294,7 +6294,7 @@ z=!1
 if(z)$.iA($.ct(),1,"selectedFormat",$.Gg,a)
 $.Gg=a},"+selectedFormat=":0,E2:function(){$.u5()},"+main:0:0":0,eu:function(){return $.WB($.WB($.WB($.r9(C.ol.gmW(window)),"//"),$.qY(C.ol.gmW(window))),":"+$.d($.tp)+$.cY)},"+getBaseUrl:0:0":0,u5:function(){$.tp=$.xC($.Mg(C.ol.gmW(window)),"3030")?"8888":$.Mg(C.ol.gmW(window))
 $.cY=$.xC($.Mg(C.ol.gmW(window)),"3030")?"/dry/service-rules-usage":C.xB.g("/dry","/dry/service-rules-usage")
-$.uV()},"+initialize:0:0":0,uV:function(){$.Kn($.WB($.eu(),"?opt=datasources"),null,null).ml(new $.lc())},"+fetchDatasources:0:0":0,Rg:function(){$.Kn($.WB($.eu(),"?opt=formats&ds="+$.OQ),null,null).ml(new $.ZD())},"+fetchFormats:0:0":0,U4:function(){$.Kn($.WB($.eu(),"?opt=convTypes&ds="+$.OQ+"&fmt="+$.d($.KG())),null,null).ml(new $.pA())},"+fetchConvTypes:0:0":0,GO:function(){$.Kn($.WB($.eu(),"?opt=segments&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)),null,null).ml(new $.Dq())},"+fetchSegments:0:0":0,ZC:function(){$.Kn($.WB($.eu(),"?opt=fields&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)+"&seg="+$.d($.eS)),null,null).ml(new $.y4())},"+fetchFields:0:0":0,mP:function(){$.Kn($.WB($.eu(),"?opt=matrix&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)+"&seg="+$.d($.eS)+"&snum="+$.d($.Aa)),null,null).ml(new $.Mh())},"+fetchMatrix:0:0":0,lO:function(a,b){var z,y
+$.uV()},"+initialize:0:0":0,uV:function(){$.Kn($.WB($.eu(),"?opt=datasources"),null,null).ml(new $.lc())},"+fetchDatasources:0:0":0,Rg:function(){$.Kn($.WB($.eu(),"?opt=formats&ds="+$.OQ),null,null).ml(new $.ZD())},"+fetchFormats:0:0":0,U4:function(){$.Kn($.WB($.eu(),"?opt=convTypes&ds="+$.OQ+"&fmt="+$.d($.KG())),null,null).ml(new $.pA())},"+fetchConvTypes:0:0":0,GO:function(){$.Kn($.WB($.eu(),"?opt=segments&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)),null,null).ml(new $.Dq())},"+fetchSegments:0:0":0,ZC:function(){$.Kn($.WB($.eu(),"?opt=fields&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)+"&seg="+$.d($.eS)),null,null).ml(new $.y4())},"+fetchFields:0:0":0,bd:function(){$.Kn($.WB($.eu(),"?opt=cases&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)+"&seg="+$.d($.eS)+"&snum="+$.d($.Aa)),null,null).ml(new $.Xe())},"+fetchCases:0:0":0,mP:function(){$.Kn($.WB($.eu(),"?opt=matrix&ds="+$.OQ+"&fmt="+$.d($.KG())+"&cvt="+$.d($.uL)+"&seg="+$.d($.eS)+"&snum="+$.d($.Aa)+"&case="+$.d($.ao)),null,null).ml(new $.Mh())},"+fetchMatrix:0:0":0,lO:function(a,b){var z,y
 z=$.Qc(b)
 y=$.xZ($.p0(z.g(b,1),40),750)===!0?750:$.WB($.p0(z.g(b,1),40),10)
 $.HA(new $.NO(a,y))},"+jsFixTableHeader:2:0":0,l9:function(a,b){var z
@@ -6328,9 +6328,15 @@ call$1:function(a){$.U2($.Le())
 $.bj($.Le(),$.AS(a,null))
 $.hv($.Le(),"*")
 if($.kE($.Le(),$.Aa)!==!0)$.Aa=$.iN($.Le())
+$.bd()},
+"+call:1:0":0,
+$isEH:true},"+fetchFields_closure": [],Xe:{"":"Tp;",
+call$1:function(a){$.U2($.pF())
+$.bj($.pF(),$.AS(a,null))
+if($.kE($.pF(),$.ao)!==!0)$.ao=$.iN($.pF())
 $.mP()},
 "+call:1:0":0,
-$isEH:true},"+fetchFields_closure": [],Mh:{"":"Tp;",
+$isEH:true},"+fetchCases_closure": [],Mh:{"":"Tp;",
 call$1:function(a){var z,y,x,w,v,u
 z=$.AS(a,null)
 y=$.JW("matrix",["fancyTable"])
@@ -6938,6 +6944,7 @@ $.OQ="b2bowner@stg"
 $.uL="315"
 $.eS="Exception"
 $.Aa="*"
+$.ao="*"
 $.f6=0
 $.Es=null
 $.Gm=100
@@ -7074,6 +7081,9 @@ I.$lazy($,"segments","n0","pg",function(){var z=$.A(null,$.O)
 $.VM(z,[$.O])
 return $.VH(z)})
 I.$lazy($,"fields","tJ","Le",function(){var z=$.A(null,$.O)
+$.VM(z,[$.O])
+return $.VH(z)})
+I.$lazy($,"rulecases","Ey","pF",function(){var z=$.A(null,$.O)
 $.VM(z,[$.O])
 return $.VH(z)})
 I.$lazy($,"__changes","b0","ct",function(){var z=$.WB($.f6,1)

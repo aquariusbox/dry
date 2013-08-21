@@ -14,6 +14,7 @@ List<String> datasources = toObservable(new List<String>());
 List<String> convTypes = toObservable(new List<String>());
 List<String> segments = toObservable(new List<String>());
 List<String> fields = toObservable(new List<String>());
+List<String> rulecases = toObservable(new List<String>());
 
 @observable
 String selectedFormat = 'CTCS2X/315';
@@ -21,6 +22,7 @@ String selectedDatasource = 'b2bowner@stg';
 String selectedConvType = '315';
 String selectedSegment = 'Exception';
 String selectedField = '*';
+String selectedRulecase = '*';
 
 main(){
   initialize();
@@ -90,12 +92,24 @@ void fetchFields(){
     // Auto select first if not found
     if(!fields.contains(selectedField))
       selectedField = fields.first;
+    fetchCases();
+  });
+}
+
+void fetchCases(){
+  var url =  getBaseUrl()+'?opt=cases&ds=$selectedDatasource&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment&snum=$selectedField';
+  var request = HttpRequest.getString(url).then((jstr){
+    rulecases.clear();
+    rulecases.addAll(json.parse(jstr));
+    // Auto select first if not found
+    if(!rulecases.contains(selectedRulecase))
+      selectedRulecase = rulecases.first;
     fetchMatrix();
   });
 }
 
 void fetchMatrix(){
-  var url = getBaseUrl()+'?opt=matrix&ds=${selectedDatasource}&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment&snum=$selectedField';
+  var url = getBaseUrl()+'?opt=matrix&ds=${selectedDatasource}&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment&snum=$selectedField&case=$selectedRulecase';
   var request = HttpRequest.getString(url).then((jstr){
     Map jmap = json.parse(jstr);
     // Create matrix table
