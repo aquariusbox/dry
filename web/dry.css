@@ -56,4 +56,11 @@ body header .container {
 .h-color {
   color: rgb(51,51,51);
  } 
+ 
+ .anchor-top{
+    font-size: 1em;
+ } 
+ .hidden {
+   display:none;
+ } 
 /** END - CSS for google map background. */

@@ -1,0 +1,51 @@
+/* Auto-generated from style sheet href = web\css\prettify.css */
+/* DO NOT EDIT. */
+
+.com {
+  color: #549b53;
+}
+.lit {
+  color: #195f91;
+}
+.pun, .opn, .clo {
+  color: #93a1a1;
+}
+.fun {
+  color: #dc322f;
+}
+.str, .atv {
+  color: #D14;
+}
+.kwd, .prettyprint .tag {
+  color: #1c4ca4;
+  font-weight: bold;
+}
+.typ, .atn, .dec, .var {
+  color: #008080;
+}
+.pln {
+  color: #2E2E31;
+}
+.prettyprint-minheight {
+  min-height: 650px;
+}
+.prettyprint {
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+.prettyprint.linenums {
+  -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+  -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+  box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+}
+ol.linenums {
+  margin: 0 0 0 33px;
+}
+ol.linenums li {
+  padding-left: 8px;
+  color: #bebec5;
+  line-height: 16px;
+  text-shadow: 0 1px 0 #fff;
+}
+

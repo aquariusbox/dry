@@ -35,7 +35,7 @@ class Navbar extends WebComponent with Observable  {
               <li id="t-dry"><a href="dry.html">Home</a></li>
               <!-- <li><a href="#about">About</a></li> -->
               <li id="t-rbase" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rbase <b class="caret"></b></a>
+                <a name="top" href="#" class="dropdown-toggle" data-toggle="dropdown">Rbase <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="map_usage.html">Map of usage</a></li>
                   <li><a href="#">Another action</a></li>
@@ -47,11 +47,11 @@ class Navbar extends WebComponent with Observable  {
                 </ul>
               </li>
             </ul>
-            <!-- <ul class="nav navbar-nav navbar-right">
-              <li><a href="http://examples.getbootstrap.com/navbar/index.html">Default</a></li>
-              <li><a href="http://examples.getbootstrap.com/navbar-static-top/index.html">Static top</a></li>
-              <li><a href="http://examples.getbootstrap.com/navbar-fixed-top/index.html">Fixed top</a></li>
-            </ul>--> 
+            <ul class="nav navbar-nav navbar-right">
+              <!--<li><a href="http://examples.getbootstrap.com/navbar/index.html">Default</a></li>
+              <li><a href="http://examples.getbootstrap.com/navbar-static-top/index.html">Static top</a></li>-->
+              <li><span id="navbar-msg" class="label label-warning hidden">LOADING</span></li>
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
