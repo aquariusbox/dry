@@ -3,12 +3,12 @@ import 'package:web_ui/web_ui.dart';
 import 'dart:async'; 
 import 'dart:json' as json;
 import 'package:js/js.dart' as js;
+import 'utils.dart' as dry;
 
+const int MATRIX_HEIGHT = 750;
+const MATRIX_HEADING = 'Rules / PMT';
 const SERVICE = '/dry/service-rules-usage';
-const TESTING_PORT = '8888';
-const HEADING_OF_TABLE = 'Rules / PMT';
-String port;
-String service;
+
 List<String> formats = toObservable(new List<String>());
 List<String> datasources = toObservable(new List<String>());
 List<String> convTypes = toObservable(new List<String>());
@@ -27,28 +27,12 @@ String selectedRulecase = '*';
 Map metas;
 
 main(){
-  initialize();
-}
-
-void loading(bool show){
-  if(show)
-    query('#navbar-msg').classes.remove('hidden');
-  else
-    query('#navbar-msg').classes.add('hidden');
-}
-// Get the base url
-String getBaseUrl(){
-  return window.location.protocol + '//'+ window.location.hostname + ':$port$service';
-}
-
-void initialize(){  
-  port = window.location.port == '3030' ? TESTING_PORT : window.location.port;
-  service = window.location.port == '3030' ? SERVICE : '/dry'+SERVICE;
+  // initialize
   fetchDatasources();
 }
 
 void fetchDatasources(){
-  var url =  getBaseUrl()+'?opt=datasources';
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('datasources');
   var request = HttpRequest.getString(url).then((jstr){
     datasources.addAll(json.parse(jstr));
     fetchFormats();
@@ -56,7 +40,7 @@ void fetchDatasources(){
 }
 
 void fetchFormats(){
-  var url =  getBaseUrl()+'?opt=formats&ds=${selectedDatasource}';
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('formats', selectedDatasource);
   var request = HttpRequest.getString(url).then((jstr){
     formats.clear();
     formats.addAll(json.parse(jstr)); 
@@ -68,7 +52,7 @@ void fetchFormats(){
 }
 
 void fetchConvTypes(){
-  var url =  getBaseUrl()+'?opt=convTypes&ds=${selectedDatasource}&fmt=${selectedFormat}';
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('convTypes', selectedDatasource, selectedFormat);
   var request = HttpRequest.getString(url).then((jstr){
     convTypes.clear();
     convTypes.addAll(json.parse(jstr));
@@ -80,7 +64,7 @@ void fetchConvTypes(){
 }
 
 void fetchSegments(){
-  var url =  getBaseUrl()+'?opt=segments&ds=${selectedDatasource}&fmt=${selectedFormat}&cvt=${selectedConvType}';
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('segments', selectedDatasource, selectedFormat, selectedConvType);
   var request = HttpRequest.getString(url).then((jstr){
     segments.clear();
     segments.addAll(json.parse(jstr));
@@ -92,7 +76,7 @@ void fetchSegments(){
 }
 
 void fetchFields(){
-  var url =  getBaseUrl()+'?opt=fields&ds=$selectedDatasource&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment';
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('fields', selectedDatasource, selectedFormat, selectedConvType, selectedSegment);
   var request = HttpRequest.getString(url).then((jstr){
     fields.clear();
     fields.addAll(json.parse(jstr));
@@ -105,7 +89,7 @@ void fetchFields(){
 }
 
 void fetchCases(){
-  var url =  getBaseUrl()+'?opt=cases&ds=$selectedDatasource&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment&snum=$selectedField';
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('cases', selectedDatasource, selectedFormat, selectedConvType, selectedSegment, selectedField);
   var request = HttpRequest.getString(url).then((jstr){
     rulecases.clear();
     rulecases.addAll(json.parse(jstr));
@@ -117,14 +101,14 @@ void fetchCases(){
 }
 
 void fetchMatrix(){
-  loading(true);
-  var url = getBaseUrl()+'?opt=matrix&ds=${selectedDatasource}&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment&snum=$selectedField&case=$selectedRulecase';
+  dry.loading(true);
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('matrix', selectedDatasource, selectedFormat, selectedConvType, selectedSegment, selectedField, selectedRulecase);
   var request = HttpRequest.getString(url).then((jstr){
     Map jmap = json.parse(jstr);
     // Create matrix table
-    Matix matrix = new Matix("matrix", ['fancyTable']);
+    Matrix matrix = new Matrix("matrix", ['fancyTable']);
     List<String> headings = new List();
-    headings.add(HEADING_OF_TABLE);
+    headings.add(MATRIX_HEADING);
     headings.addAll(jmap['tpIds']);
     matrix.bindHeader(headings);
     matrix.bindData(headings, jmap['keys'], jmap['sequences'],jmap['detail']);
@@ -133,18 +117,37 @@ void fetchMatrix(){
     if(parent.hasChildNodes())
       parent.children.removeLast();
     
-    add2Dom(matrix, parent);
+    dry.add2Dom(matrix, parent);
     
     jsFixTableHeader("#matrix",  jmap['detail'].length);
     
-    loading(false);
+    dry.loading(false);
     fetchDocument();
   }); 
 }
 
+String parametersStr(String operation, [String datasource, String format, String convertType, String segId, String segNum, String ruleCase]){
+  var parameters = '?opt='+operation;
+  if(datasource != null)
+    parameters = parameters +'&ds=' + datasource;
+  if(format != null)
+    parameters = parameters +'&fmt=' + format;
+  if(convertType != null)
+    parameters = parameters +'&cvt=' + convertType;
+  if(segId != null)
+    parameters = parameters +'&seg=' + segId;
+  if(segId != null)
+    parameters = parameters +'&seg=' + segId;
+  if(segNum != null)
+    parameters = parameters +'&snum=' + segNum;
+  if(ruleCase != null)
+    parameters = parameters +'&case=' + ruleCase;
+  return parameters;
+}
+
 void fetchDocument(){
-  loading(true);
-  var url = getBaseUrl()+'?opt=document&ds=${selectedDatasource}&fmt=$selectedFormat&cvt=$selectedConvType&seg=$selectedSegment&snum=$selectedField&case=$selectedRulecase';
+  dry.loading(true);
+  var url = dry.getBaseUrl(SERVICE)+parametersStr('document', selectedDatasource, selectedFormat, selectedConvType, selectedSegment, selectedField, selectedRulecase);
   var request = HttpRequest.getString(url).then((jstr){
       metas = json.parse(jstr);
       if(query('#definition') != null){
@@ -159,42 +162,46 @@ void fetchDocument(){
         var meta = metas[fingerprint]['meta'];
         Definition def = new Definition();
         def.bindData(fingerprint, rule, meta);
-        //query('#div-definitions').children.addAll(def.elements);
-        add2Dom(def);    
+        dry.add2Dom(def);    
       }
-      
-      jsprettyPrint();
+      // Pretty print code.
+      dry.jsprettyPrint();
   });
-  loading(false);
+  dry.loading(false);
   return;
 }
 
+/**
+ * When list of datasource is changed.
+ */
 void onDatasourcesChange(){
   fetchFormats();
 }
+
+/**
+ * When list of formats is changed.
+ */
 void onFormatsChange(){
   fetchConvTypes();
 }
 
-
+/**
+ * Call javascript to fix the first row and first colume in matrix table.
+ */
 void jsFixTableHeader(String selector, int numOfRec){
-  var height = (numOfRec+1) * 40 > 750 ? 750 : ((numOfRec+1) * 40) + 10;
+  var height = (numOfRec+1) * 40 > MATRIX_HEIGHT ? MATRIX_HEIGHT : ((numOfRec+1) * 40) + 10;
   js.scoped((){
-    //var param = js.map({'footer': true, 'cloneHeadToFoot': true, 'fixedColumns' : 1});
-    var param = js.map({'footer': height >= 750, 'cloneHeadToFoot': true,'height':height,'fixedColumns' : 1});
+    // Need footer if height of table LT matrix height.
+    var param = js.map({'footer': height >= MATRIX_HEIGHT, 'cloneHeadToFoot': true,'height':height,'fixedColumns' : 1});
     js.context.jQuery(selector).fixedHeaderTable(param);
     }  
   );
 }
 
-void jsprettyPrint(){
-  js.scoped((){
-    js.context.prettyPrint();
-    }  
-  );
-}
-
-class Definition extends View {
+/**
+ * Definition view for each rule.
+ */
+class Definition extends dry.View {
   DivElement _div;
   
   Definition(){
@@ -236,35 +243,36 @@ class Definition extends View {
     List<Element> result = new List();
     result.add(_div);
     return result;
-  }  
-  
+  }    
 }
 
-class Matix extends View{
+/**
+ * Matrix table of rules usage.
+ */
+class Matrix extends dry.View{
   // Tag table
   TableElement _table;
   
-  Matix(String id, List<String> styles){
+  Matrix(String id, List<String> styles){
     _table = new Element.tag("table");
     _table.id = id;
-    //_table.classes = ['table table-bordered table-condensed table-hover fancyTable'];
-    // _table.classes = ['fancyTable'];
     _table.classes = styles;
   }
   
-  // Bind table header
-  void bindHeader(List<String> headings, [List<String> rowStyle, List<String> cellStyle]){
+  // Bind header
+  void bindHeader(List<String> headings, [List<String> rowStyle, List<String> cellStyles]){
     Element thead = new Element.tag('thead');
-    TableRowElement row = new Element.tr();
+    TableRowElement tr = new Element.tr();
     if(rowStyle != null)
-      row.classes = rowStyle;
-    thead.nodes.add(row);
+      tr.classes = rowStyle;
+    thead.nodes.add(tr);
+    
     headings.forEach((heading){
-      TableCellElement cell = new Element.th();
-      if(cellStyle != null)
-        cell.classes = cellStyle;
-      cell.text = heading;
-      row.nodes.add(cell);      
+      TableCellElement th = new Element.th();
+      if(cellStyles != null)
+        th.classes = cellStyles;
+      th.text = heading;
+      tr.nodes.add(th);      
     });
     _table.nodes.add(thead);
   }
@@ -275,34 +283,39 @@ class Matix extends View{
     return anchor;
   }
   
-  // bind the data item into the table
-  void bindData(List<String> headings, List<String> keysOfRule, Map<String,String> sequences,  Map<String,Map<String,String>> detail){
+  /**
+   * Assign value into table cell.
+   */
+  void bindData(List<String> headings, List<String> fingerprints, Map<String,String> sequences,  Map<String,Map<String,String>> detail){
     Element tbody = new Element.tag('tbody');
-    keysOfRule.forEach((current){
-      TableRowElement row = new Element.tr();
-      tbody.nodes.add(row);
+    fingerprints.forEach((fingerprint){
+      TableRowElement tr = new Element.tr();
+      tbody.nodes.add(tr);
+      
       var idxColn = 0;
       headings.forEach((heading){
-        var id = current+"-"+heading;
+        var fingerprintTp = fingerprint+"-"+heading;
         var fieldValue = ' ';
-        if(heading != HEADING_OF_TABLE){
-          if(sequences.containsKey(id))
-            fieldValue = '<span class="label label-info">'+sequences[id]+'</span>';  
-        } else { // Print the rule name
-            fieldValue = '<p><span class="badge">'+detail[current]['ruleCase']+'</span> ' + 
-                //detail[current]['segNum']+" / "+detail[current]['ruleName']+
-                '<a href="#$current">'+detail[current]['segNum']+" / "+detail[current]['ruleName']+'</a>'
+        // Not 1st column
+        if(heading != MATRIX_HEADING){
+          if(sequences.containsKey(fingerprintTp))
+            fieldValue = '<span class="label label-info">'+sequences[fingerprintTp]+'</span>';  
+        } else { 
+            // Print the rule name
+            fieldValue = '<p><span class="badge">'+detail[fingerprint]['ruleCase']+'</span> ' + 
+                '<a href="#$fingerprint">'+detail[fingerprint]['segNum']+" / "+detail[fingerprint]['ruleName']+'</a>'
                 "</p>"; 
         }
           
-        TableCellElement cell = new Element.td();
+        TableCellElement td = new Element.td();
         if(fieldValue.contains("span")){
           if(idxColn++ > 0)
-             cell.attributes = {"align":"center"};
-          cell.nodes.add(new Element.html(fieldValue));
-        }else
-          cell.text = fieldValue;
-        row.nodes.add(cell);
+             td.attributes = {"align":"center"};
+          td.nodes.add(new Element.html(fieldValue));
+        }
+        else
+          td.text = fieldValue;
+        tr.nodes.add(td);
       });
     });
     _table.nodes.add(tbody);
@@ -315,16 +328,4 @@ class Matix extends View{
     return result;
   }  
   
-}
-
-abstract class View{
-  List<Element> elements;
-}
-
-// Add view to DOM tree
-void add2Dom(View view, [Element parent]){
-  if(parent == null){
-    parent = document.body;
-  }
-  parent.nodes.addAll(view.elements);
 }
