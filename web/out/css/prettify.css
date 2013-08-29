@@ -14,17 +14,17 @@
   color: #dc322f;
 }
 .str, .atv {
-  color: #D14;
+  color: #2E2E31;
 }
 .kwd, .prettyprint .tag {
   color: #1c4ca4;
   font-weight: bold;
 }
 .typ, .atn, .dec, .var {
-  color: #008080;
+  color: #D14;
 }
 .pln {
-  color: #2E2E31;
+  color: #008080;
 }
 .prettyprint-minheight {
   min-height: 650px;

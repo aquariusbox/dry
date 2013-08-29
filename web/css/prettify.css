@@ -3,12 +3,14 @@
 .lit { color: #195f91; }
 .pun, .opn, .clo { color: #93a1a1; }
 .fun { color: #dc322f; }
-.str, .atv { color: #D14; }
+/*.str, .atv { color: teal; }*/
+.str, .atv { color: #2E2E31; }
+
 /*.kwd, .prettyprint .tag { color: #1e347b; }*/
 .kwd, .prettyprint .tag { color: #1c4ca4; font-weight: bold;}
-.typ, .atn, .dec, .var { color: teal; }
+.typ, .atn, .dec, .var { color: #D14; }
 /*.pln { color: #48484c; }*/
-.pln { color: #2E2E31; }
+.pln { color: teal; }
 
 .prettyprint-minheight{
   min-height:650px;

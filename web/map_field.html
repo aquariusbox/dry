@@ -44,7 +44,14 @@
                <select id="ip-tps" class="form-control" name="tp" template iterate="tp in tps" bind-value="selectedTp" on-change="onFormatsChange()">
                   <option selected="{{selectedTp == tp}}">{{tp}}</option>
                </select>
-            </div>            
+            </div>  
+            <!--       
+            <div class="col-md-2">
+               <select id="ip-tp2" class="form-control" name="tp2" template iterate="tp2 in tp2s" bind-value="selectedTp2" on-change="onFormatsChange()">
+                  <option selected="{{selectedTp2 == tp2}}">{{tp2}}</option>
+               </select>
+            </div>    
+            -->                       
          </div>
       </div>
       <div class="container"><h5></h5></div>

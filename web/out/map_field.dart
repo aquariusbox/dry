@@ -26,7 +26,7 @@ const SERVICE = '/dry/service-rules-usage';
 List<String> formats = toObservable(new List<String>());
 List<String> datasources = toObservable(new List<String>());
 List<String> tps = toObservable(new List<String>());
-
+List<String> tp2s = toObservable(new List<String>());
 
 final __changes = new __observe.Observable();
 
@@ -46,6 +46,7 @@ set selectedFormat(String value) {
 }
 String selectedDatasource = 'b2bowner@stg';
 String selectedTp = 'GTNEXUS';
+String selectedTp2 = '-';
 
 Map metas;
 
@@ -80,9 +81,14 @@ void fetchTps(){
   var request = HttpRequest.getString(url).then((jstr){
     tps.clear();
     tps.addAll(json.parse(jstr)); 
+    tp2s.add('-');
+    tp2s.addAll(tps);
+    
     // Auto select first if not found
     if(!tps.contains(selectedTp))
       selectedTp = tps.first;
+    if(!tp2s.contains(selectedTp2))
+      selectedTp2 = tp2s.first;    
     fetchMd();
   });
 }
@@ -214,6 +220,7 @@ class Matrix extends dry.View{
       tbody.nodes.add(tr);
       headings.forEach((heading){
         TableCellElement td = new Element.td();
+        tr.nodes.add(td);
         var text = '';
         if (heading == 'Segment')
           text = map['segId'];
@@ -226,16 +233,21 @@ class Matrix extends dry.View{
         else if(heading == 'Len')
           text = map['dataLength'];    
         else if(heading == 'Max')
-          text = map['maxUse'];           
+          text = map['maxUse'];  
+        
         if(heading == 'Mapping'){   
-          Element pre = new Element.pre();
-          pre.classes = ['prettyprint lang-dart'];
-          pre.text = map['code'];
-          td.nodes.add(pre);
-        }else{
-          td.text = text;
-        }
-        tr.nodes.add(td);
+          if(map['code'] != ""){
+            Element pre = new Element.pre();
+            pre.classes = ['prettyprint lang-dart'];
+            pre.text = map['code'];
+            td.nodes.add(pre);
+            return;
+          }else{
+            text = 'NOT USED';
+            //td.text = text;
+          }
+        } 
+        td.text = text;
       });
     });
     _table.nodes.add(tbody);
